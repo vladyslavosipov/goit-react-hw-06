@@ -1,0 +1,37 @@
+.container {
+    margin-bottom: 40px;
+  }
+  
+  .form {
+    max-width: 100vh;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .label {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .field {
+    outline: none;
+    margin-bottom: 10px;
+    box-shadow: 2px 2px 2px 2px lightgrey;
+  }
+  
+  .button {
+    width: 140px;
+    height: 30px;
+    margin: 0 auto;
+    border: none;
+    border-radius: 8px;
+  }
+
+  .button:focus,
+  .button:hover {
+    background-color: gray;
+    color: aliceblue;
+  }
