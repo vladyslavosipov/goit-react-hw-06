@@ -1,34 +1,43 @@
-.container {
+.li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid black;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    position: relative;
+    width: 100%;
+   
+  }
+  
+  .containerLi {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .liInfo {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 8px;
-    border: 2px solid black;
-    border-radius: 8px;
-    width: 260px;
-    background-color: lightgray;
   }
   
-  .text {
-    display: flex;
-    gap: 6px;
-  }
-
-  .button {
-    display: flex;
-    gap: 8px;
-    cursor: pointer;
-  
-    color: black;
-    padding: 10px;
-    border-radius: 4px;
-    margin: 0;
-  }
-
-  .wrapper {
-    display: flex;
-    gap: 8px;
-    padding: 4px;
+  .icon {
+    margin-right: 8px;
     font-size: 16px;
-    flex-direction: column;
+  }
+  
+  .name,
+  .number {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .deleteButton {
+    background-color: lightgray;
+    border: 1px solid darkgray;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 12px;
   }

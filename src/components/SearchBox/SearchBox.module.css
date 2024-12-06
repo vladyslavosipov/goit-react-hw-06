@@ -1,12 +1,18 @@
-.container {
+.searchBox {
+    width: 100%;
+    max-width: 300px;
     margin-bottom: 20px;
   }
-
-  .text {
-    font-size: 22px;
+  
+  label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
   }
   
-  .input {
-    outline: none;
-    width: 336px;
+  input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid black;
+    border-radius: 4px;
   }

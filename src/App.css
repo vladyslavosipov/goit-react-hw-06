@@ -1,0 +1,16 @@
+#root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .containerApp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 150px;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+  

@@ -1,67 +1,63 @@
-import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { nanoid } from "nanoid";
-import s from "./ContactForm.module.css";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contactsSlice";
+import { selectContacts } from "../../redux/contactsSlice";
+import css from "./ContactForm.module.css";
+
+const validationSchema = Yup.object({
+  name: Yup.string().required("Name is required"),
+  number: Yup.string()
+    .matches(/^[0-9]+$/, "Phone number must contain only digits")
+    .required("Number is required"),
+});
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const initialValues = {
-    name: "",
-    number: "",
-  };
-  const handleSubmit = (values, actions) => {
-    dispatch(
-      addContact({
-        ...values,
-        id: nanoid(),
-      })
+  const contacts = useSelector(selectContacts);
+
+  const handleSubmit = (values, { resetForm }) => {
+    
+    const duplicate = contacts.some(
+      (contact) => contact.name.toLowerCase() === values.name.toLowerCase()
     );
-    actions.resetForm();
+    if (duplicate) {
+      alert(`${values.name} is already in contacts!`);
+      return;
+    }
+
+
+    dispatch(addContact({ id: Date.now().toString(), ...values }));
+    resetForm();
   };
 
-  const orderSchema = Yup.object().shape({
-    name: Yup.string().min(3).max(50).required(),
-    number: Yup.string().min(3).max(50).required(),
-  });
   return (
-    <div className={s.container}>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
-        validationSchema={orderSchema}
-      >
-        <Form className={s.form}>
-          <label className={s.label}>
-            <span> Name</span>
+    <Formik
+      initialValues={{ name: "", number: "" }}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {() => (
+        <Form className={css.contactForm}>
+          <div>
+            <label htmlFor="name">Name</label>
+            <Field type="text" id="name" name="name" placeholder="Enter name" />
+            <ErrorMessage name="name" component="div" className={css.error} />
+          </div>
+          <div>
+            <label htmlFor="number">Number</label>
             <Field
               type="text"
-              name="name"
-              className={s.field}
-              placeholder="Name"
-            ></Field>
-            <ErrorMessage name="name" component="span" className={s.error} />
-          </label>
-
-          <label className={s.label}>
-            <span>Number</span>
-            <Field
-              type="text"
+              id="number"
               name="number"
-              className={s.field}
-              placeholder="XXX-XX-XX"
-            ></Field>
-            <ErrorMessage name="name" component="span" className={s.error} />
-          </label>
-
-          <button type="submit" className={s.button}>
-            Add contact
-          </button>
+              placeholder="Enter phone number"
+            />
+            <ErrorMessage name="number" component="div" className={css.error} />
+          </div>
+          <button type="submit">Add Contact</button>
         </Form>
-      </Formik>
-    </div>
+      )}
+    </Formik>
   );
 };
 
